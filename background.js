@@ -15,6 +15,27 @@ let communitySites = [
 	,"*://*.fomos.kr/*"
 ];
 
+communityKeywordList = [
+	'dcinside',
+	'fmkorea',
+	'ilbe',
+	'ruliweb',
+	'ppomppu',
+	'inven',
+	'theqoo',
+	'clien',
+	'pann',
+	'nate',
+	'humoruniv',
+	'mlbpark',
+	'donga',
+	'instagram',
+	'facebook',
+	'fomos'
+];
+
+
+
 
 if (!localStorage.on) {
     localStorage.on = '1';
@@ -42,3 +63,20 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
 		return {redirectUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="}; 
 	}
 }, { urls: communitySites, types: ["image", "object"]}, ["blocking"]); 
+
+
+
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+	if (localStorage.on == '1'){
+		communityKeywordList.forEach( function(s) { 
+			if (tab.url.indexOf(s) > -1) {
+				 chrome.tabs.insertCSS(null, {code: "img{visibility: hidden;}", runAt: "document_start"});
+				 return;
+			}
+		})
+	}
+}); 
+
+
+
