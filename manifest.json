@@ -1,6 +1,7 @@
 {
    "background": {
-      "scripts": [ "background.js" ]
+      "scripts": [ "background.js" ],
+      "persistent": true
    },
    "browser_action": {
       "default_icon": {
@@ -18,6 +19,6 @@
    "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCcZP/Ura7v1FcSRi1LIys0ERKMjCUCku1Lafw0qRrz3lST3hmg8NyCiY0y6qeH6OaTtPyePAyyo7ShCTsoyOK5Y7HmXFG8IyOMAjyyWHXBJ22vDPDClbAF6cCLlMu6SalAEj14hzwvL7rOh4VfT6eENELvMoDwYlOu/VIkcyHZwQIDAQAB",
    "manifest_version": 2,
    "name": "__MSG_extension_name__",
-   "permissions": ["webRequest", "webRequestBlocking", "\u003Call_urls>", "tabs"],
+   "permissions": ["storage", "unlimitedStorage", "webRequest", "webRequestBlocking", "\u003Call_urls>", "tabs"],
    "version": "1.0.0"
 }

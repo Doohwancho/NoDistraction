@@ -62,21 +62,19 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
 	if (localStorage.on == '1') {
 		return {redirectUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="}; 
 	}
-}, { urls: communitySites, types: ["image", "object"]}, ["blocking"]); 
-
+}, { urls: communitySites, types: ["image", "object", "media", "sub_frame",  'stylesheet']}, ["blocking"]);  
 
 
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	if (localStorage.on == '1'){
+
 		communityKeywordList.forEach( function(s) { 
 			if (tab.url.indexOf(s) > -1) {
-				 chrome.tabs.insertCSS(null, {code: "img{visibility: hidden;}", runAt: "document_start"});
-				 return;
+				chrome.tabs.insertCSS(null, {code: "img{display: none; visibility: hidden;}", runAt: "document_start"});  //document_start, document_end, document_idle
+				chrome.tabs.executeScript(null, {code: "document.querySelectorAll('iframe').forEach(iframe => iframe.remove());", runAt: "document_end"});   //document_end this is the best
+				return;
 			}
 		})
 	}
 }); 
-
-
-
