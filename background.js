@@ -65,14 +65,12 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
 }, { urls: communitySites, types: ["image", "object", "media", "sub_frame"]}, ["blocking"]);  //stylesheet
 
 
-
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	if (localStorage.on == '1'){
-
 		communityKeywordList.forEach( function(s) { 
 			if (tab.url.indexOf(s) > -1) {
-				chrome.tabs.insertCSS(null, {code: "img{display: none; visibility: hidden;}", runAt: "document_start"});  //document_start, document_end, document_idle
-				chrome.tabs.executeScript(null, {code: "document.querySelectorAll('iframe').forEach(iframe => iframe.remove()); document.querySelectorAll('embed').forEach(iframe => iframe.remove());", runAt: "document_end"});   //document_end this is the best
+				chrome.tabs.insertCSS(null, {code: "img{display: none; visibility: hidden;} video{display: none}", runAt: "document_start"}); 
+				chrome.tabs.executeScript(null, {code: "document.querySelectorAll('video').forEach(video => video.remove()); document.querySelectorAll('iframe').forEach(iframe => iframe.remove()); document.querySelectorAll('embed').forEach(embed => embed.remove());", runAt: "document_end"});   
 				return;
 			}
 		})
