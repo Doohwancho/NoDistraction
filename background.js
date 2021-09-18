@@ -74,12 +74,9 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		communityKeywordList.forEach( function(s) { 
 			if (tab.url.indexOf(s) > -1) {
 				if ( changeInfo.status === "loading" ){
-					browser.tabs.insertCSS(null, {code: "html{display:none;}", runAt: "document_start"}); 
+					browser.tabs.insertCSS(null, {code: "html{display:none;} img{display: none; visibility: hidden;", runAt: "document_start"}); 
 				}
-				if ( changeInfo.status === "complete" ){
-					browser.tabs.insertCSS(null, {code: "html{display:block;} img{display: none; visibility: hidden;} video{display: none} "}); 
-				}
-				browser.tabs.executeScript(null, {code: "document.querySelectorAll('video').forEach(video => video.remove()); document.querySelectorAll('iframe').forEach(iframe => iframe.remove()); document.querySelectorAll('embed').forEach(embed => embed.remove());", runAt: "document_end"});   
+				browser.tabs.executeScript(null, {code: "document.querySelectorAll('video').forEach(video => video.remove()); document.querySelectorAll('iframe').forEach(iframe => iframe.remove()); document.querySelectorAll('embed').forEach(embed => embed.remove()); document.getElementsByTagName('html')[0].style.display='block';", runAt: "document_end"});   
 				return;
 			}
 		})
