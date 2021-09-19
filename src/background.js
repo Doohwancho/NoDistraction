@@ -37,7 +37,7 @@ let communityKeywordList = [
 let browser;
 
 if (typeof browser === "undefined") {
-  browser = chrome;
+  browser = window.chrome;
 }
 
 if (!localStorage.on) {
