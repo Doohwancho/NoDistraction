@@ -1,5 +1,6 @@
 {
    "background": {
+      "css": ["src/block_style.css"],
       "scripts": [ "src/background.js" ],
       "persistent": true
    },
