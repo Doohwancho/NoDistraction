@@ -16,22 +16,22 @@ let communitySites = [
 ];
 
 let communityKeywordList = [
-  "dcinside",
-  "fmkorea",
-  "ilbe",
-  "ruliweb",
-  "ppomppu",
-  "inven",
-  "theqoo",
-  "clien",
-  "pann",
-  "nate",
-  "humoruniv",
-  "mlbpark",
-  "donga",
-  "instagram",
-  "facebook",
-  "fomos",
+  "dcinside.",
+  "fmkorea.",
+  "ilbe.",
+  "ruliweb.",
+  "ppomppu.",
+  "inven.",
+  "theqoo.",
+  "clien.",
+  "pann.",
+  "nate.",
+  "humoruniv.",
+  "mlbpark.",
+  "donga.",
+  "instagram.",
+  "facebook.",
+  "fomos.",
 ];
 
 let browser;

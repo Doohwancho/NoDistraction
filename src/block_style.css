@@ -36,4 +36,5 @@
 	visibility: hidden !important;
 }
 
+html{display:none;}
 img{display: none; visibility: hidden;}
