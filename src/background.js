@@ -73,11 +73,11 @@ browser.webRequest.onBeforeRequest.addListener(
   ["blocking"]
 ); //stylesheet
 
-browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+function removeDistractions(tabId, status, url) {
   if (localStorage.on == "1") {
     communityKeywordList.forEach(function (s) {
-      if (tab.url.indexOf(s) > -1) {
-        if (changeInfo.status === "loading") {
+      if (url.indexOf(s) > -1) {
+        if (status === "loading") {
           browser.tabs.insertCSS(
             {
               file: "src/block_style.css",
@@ -101,4 +101,28 @@ browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
       }
     });
   }
+}
+
+browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  removeDistractions(tabId, changeInfo.status, tab.url);
+});
+
+browser.tabs.onCreated.addListener(function (tab) {
+  browser.tabs.insertCSS(tab.id, {
+    file: "src/block_style.css",
+    allFrames: true,
+    runAt: "document_start",
+  });
+});
+
+browser.tabs.onActivated.addListener(function () {
+  browser.tabs.executeScript({
+    code: "document.documentElement.classList.add('black-and-white-mode');",
+    allFrames: true,
+  });
+
+  browser.tabs.executeScript(null, {
+    code: "document.querySelectorAll('video').forEach(video => video.remove()); document.querySelectorAll('iframe').forEach(iframe => iframe.remove()); document.querySelectorAll('embed').forEach(embed => embed.remove()); document.getElementsByTagName('html')[0].style.display='block';",
+    runAt: "document_end",
+  });
 });
