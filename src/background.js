@@ -79,6 +79,7 @@ function removeDistractions(tabId, status, url) {
       if (url.indexOf(s) > -1) {
         if (status === "loading") {
           browser.tabs.insertCSS(
+            tabId,
             {
               file: "src/block_style.css",
               allFrames: true,
